@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/iamamofa/BACLAB/refs/heads/main/baclab.png" height="450">
+
 # BACLAB
 ### BACLAB Bacterial WGS Pipeline (Google Colab • Conda/Mamba)
 

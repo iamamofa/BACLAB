@@ -81,3 +81,104 @@ sample,read_type,r1,r2
 EC001,PE,EC001_R1_001.fastq.gz,EC001_R2_001.fastq.gz
 EC002,PE,EC002_R1_001.fastq.gz,EC002_R2_001.fastq.gz
 EC003,SE,EC003.fastq.gz,
+
+```
+
+## LIGHT database downloader (optional)
+
+Colab storage is limited, so the notebook defaults to downloading only **small/light databases**.
+
+### Default LIGHT set (ON)
+- **`resfinder_db`** — AMR genes  
+- **`mlst_db`** — MLST schemes  
+
+### Optional (OFF by default; can be larger)
+- **`pointfinder_db`** — AMR point mutations (species-specific)  
+- **`plasmidfinder_db`** — plasmid replicons  
+- **`virulencefinder_db`** — virulence genes  
+
+### Database location
+Databases are stored under:
+- **`DB_ROOT`** *(recommended to point to Google Drive for persistence)*
+
+### How to download
+To download databases, set:
+- **`RUN_DB_DOWNLOAD = True`**
+
+---
+
+## Output structure
+
+All results are written to:
+
+`/content/bacterial_pipeline_run/`
+
+### Key folders
+- **`trimmed/`**  
+  Trimmed FASTQs (paired/unpaired for PE; single trimmed for SE)
+
+- **`qc/`**  
+  FastQC outputs + `multiqc_report.html`
+
+- **`assembly_runs/`**  
+  Full output per sample (Unicycler or SPAdes)
+
+- **`assembled_files/`**  
+  Final assemblies saved as:  
+  - `SAMPLE.fasta`
+
+- **`logs/`**  
+  Per-sample logs for trimming and assembly
+
+### Final export
+At the end, the notebook creates and downloads a ZIP:
+
+`baclab_bacterial_pipeline_results_<timestamp>.zip`
+
+---
+
+## How to run (quick steps)
+
+1. Open `BACLAB_Bacterial_Pipeline_Colab_LIGHTDB.ipynb` in **Google Colab**
+2. Run the installation cells (**Conda → env → tools**)
+3. *(Optional)* Mount Drive and run **LIGHT database download**
+4. Choose input mode:
+   - `SINGLE_SAMPLE` **or** `SAMPLESHEET`
+5. Run:
+   - Trimming → FastQC/MultiQC → Assembly
+6. Download the final ZIP
+
+---
+
+## Notes / Tips
+
+- **Paired-end recommended:** Unicycler performs best with PE short reads.
+- **Colab memory limits:** If assembly crashes, reduce `THREADS_ASSEMBLY` and run fewer samples per session.
+- **Adapters:** Trimmomatic adapters are taken from the conda install. Choose the correct adapter set for your library prep (e.g., Nextera vs TruSeq).
+
+---
+
+## Troubleshooting
+
+### No samples detected
+- Ensure `MODE` is set correctly
+- Check file paths exist
+- Confirm samplesheet columns are correct (`sample`, `read_type`, etc.)
+
+### File not found for a sample
+- Confirm `DATA_DIR` is correct
+- Ensure filenames in samplesheet match exactly (case-sensitive)
+- Use absolute paths if needed
+
+### Unicycler/SPAdes fails
+- Reduce `THREADS_ASSEMBLY`
+- Try running fewer samples per session
+- Confirm input FASTQs are not corrupted
+
+---
+
+## Acknowledgements
+
+This notebook uses standard open-source bioinformatics tools:
+- Trimmomatic, FastQC, MultiQC, Unicycler, SPAdes  
+and optional CGE database repositories for downstream analysis.

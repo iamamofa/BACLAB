@@ -1,7 +1,11 @@
 <img src="https://raw.githubusercontent.com/iamamofa/BACLAB/refs/heads/main/baclab.png" height="450">
 
+
+<li> <a href="https://colab.research.google.com/drive/1MC1bg80356yF6ivsmNk4wxjYUu7elNRh?usp=sharing"> Link  to BACLAB </a> </li>
+
 # BACLAB
 ### BACLAB Bacterial WGS Pipeline (Google Colab • Conda/Mamba)
+
 
 This project provides a **Google Colab notebook** that runs a lightweight, reproducible bacterial WGS pipeline:
 
@@ -10,6 +14,7 @@ This project provides a **Google Colab notebook** that runs a lightweight, repro
 - **Single-end (SE):** SPAdes (`--careful`)
 
 It also includes an **optional “LIGHT database downloader”** (small-by-default) for common CGE databases.
+
 
 ---
 
